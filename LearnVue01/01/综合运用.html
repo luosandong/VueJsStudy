@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>综合运用</title>
+    <style>
+        .container {
+            display: flex;
+            /* justify-content: space-around; */
+            align-items: center;
+        }
+
+        .book_list {
+            background-color: #fff;
+            padding: 30px;
+            width: 80%;
+        }
+
+        .item_default {
+            color: #333;
+            background-color: #fff;
+            padding: 5px 0;
+            cursor: pointer;
+        }
+
+        .item_default:hover {
+            color: #fff;
+            background-color: #1E1F1C;
+        }
+
+        .actived {
+            color: #fff;
+            background-color: #1E1F1C;
+        }
+    </style>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div class="container" id="app">
+        <h1>{{title}}</h1>
+        <div class="book_list">
+            <ul>
+                <li class="item_default" v-bind:class="activedIndex==index? 'actived':''"
+                    v-on:click="changeColor(index)" v-for="(item,index) in books">
+                    {{index+1}}-{{item.name}}[{{item.price}}]</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                activedIndex: -1,
+                title: '书单',
+                books: [{
+                        name: 'Java编程思想',
+                        price: 98
+                    },
+                    {
+                        name: 'C#高级编程',
+                        price: 106
+                    }, {
+                        name: 'JavaScript权威指南',
+                        price: 198
+                    }
+                ]
+            },
+            methods: {
+                changeColor: function (index) {
+                    this.activedIndex = index;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>V-once Demo</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+
+        .actived {
+            color: red;
+            font-size: 20px;
+        }
+
+        .disabled {
+            color: blue;
+        }
+
+        .default {
+            display: inline-block;
+            width: 80;
+            height: 50;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h1 v-cloak>{{message}}</h1>
+        <h1 v-cloak v-once>{{message}}</h1>
+        <img :src="iconUrl" alt="">
+        <span class="default" v-bind:class="{actived:isActived,disabled:!isActived}">{{message}}</span>
+        <span class="default" v-bind:class="getclasses()">{{message}}</span>
+        <button v-on:click="change">改变值</button>
+    </div>
+    <script>
+        setTimeout(function () {
+            const app = new Vue({
+                el: '#app',
+                data: {
+                    isActived: true,
+                    message: 'Hello,Vue js',
+                    iconUrl: 'https://i0.hdslb.com/bfs/face/a987c9f66ae3da0a8cf8d4f813221c1958ca1a42.jpg@72w_72h.webp'
+                },
+                methods: {
+                    change: function () {
+                        this.message = 'Hello Kobe';
+                        this.isActived = !this.isActived;
+                    },
+                    getclasses: function () {
+                        return {
+                            actived: this.isActived,
+                            disabled: !this.isActived
+                        };
+                    }
+                }
+            });
+        }, 100)
+    </script>
+</body>
+
+</html>
