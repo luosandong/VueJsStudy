@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <span :style="{'font-size':fontSize}">{{message}}</span>
+        <span :style="styles">{{message}}</span>
+        <div>{{fullName}}</div>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                firstName: 'Kobe',
+                lastName: 'Bryant',
+                message: 'Hello Vue',
+                fontSize: '100px',
+                styles: [{
+                    'background-color': 'red'
+                }]
+            },
+            // 计算属性
+            computed: {
+                // fullName: function () {
+                //     return this.firstName + ' ' + this.lastName;
+                // }
+                fullName: {
+                    get: function () {
+                        return this.firstName + ' ' + this.lastName;
+                    },
+                    set: function (newValue) {
+                        const names = newValue.split(' ');
+                        this.firstName = names[0];
+                        this.lastName = names[1];
+                    }
+                }
+            },
+            methods: {
+                show: function () {
+
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

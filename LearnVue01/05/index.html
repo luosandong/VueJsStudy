@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>组件化学习</title>
+</head>
+
+<body>
+    <template id="head">
+        <div>
+            <h1 style="color:brown">{{title}}</h1>
+            <span>{{message}}</span>
+        </div>
+    </template>
+    <template id="contentLeft">
+        <div>
+            <h1>{{title}}</h1>
+            <span>{{message}}</span>
+        </div>
+    </template>
+    <template id="contentRight">
+        <div>
+            <h1>{{title}}</h1>
+            <span>{{message}}</span>
+        </div>
+    </template>
+    <template id="footer">
+        <div>
+            <h1>{{title}}</h1>
+            <span>{{message}}</span>
+        </div>
+    </template>
+    <template id="content">
+        <div>
+            <lsleft></lsleft>
+            <lsright></lsright>
+        </div>
+    </template>
+    <div id="app">
+        <lsheader></lsheader>
+        <lscontent></lscontent>
+        <lsfooter></lsfooter>
+    </div>
+
+
+    <script src="../js/vue.js"></script>
+    <script>
+        // 组件一
+        // const cpn1 = Vue.extend({
+        //     template:'#'
+        // });
+        const head = Vue.component('lsheader', {
+            template: '#head',
+            data() {
+                return {
+                    title: '我是头部',
+                    message: '我是头部内容'
+                };
+            }
+        });
+        const contentLeft = Vue.component('lsleft', {
+            template: '#contentLeft',
+            data() {
+                return {
+                    title: '我是左边标题',
+                    message: '我是左边内容'
+                };
+            }
+        });
+        const contentRight = Vue.component('lsright', {
+            template: '#contentRight',
+            data() {
+                return {
+                    title: '我是右边标题',
+                    message: '我是右边内容'
+                };
+            }
+        });
+        const content = Vue.component('lscontent', {
+            template: '#content',
+            data() {
+                return {
+                    title: '我是内容',
+                    message: '我是主内容'
+                };
+            },
+            components: [contentLeft, contentRight]
+        });
+        const footer = Vue.component('lsfooter', {
+            template: '#footer',
+            data() {
+                return {
+                    title: '我是底部标题',
+                    message: '我是底部内容'
+                };
+            }
+        })
+        const app = new Vue({
+            el: '#app',
+            data: {},
+            components: [head, content, footer]
+        });
+    </script>
+</body>
+
+</html>

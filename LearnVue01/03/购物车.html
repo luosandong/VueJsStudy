@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue Js 购物车案例</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div id="app">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>书名</th>
+                    <th>年份</th>
+                    <th>单价</th>
+                    <th>数量</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(book,index) in books">
+                    <td>{{index+1}}</td>
+                    <td>{{book.name}}</td>
+                    <td>{{book.years}}</td>
+                    <td>{{book.price | priceFilter}}</td>
+                    <td>
+                        <button :disabled="book.count <=1 " @click="subtraction(index)">-</button>
+                        <input type="text" :style="{'width':'20px'}" v-model="book.count">
+                        <button @click="additive(index)">+</button>
+                    </td>
+                    <td>
+                        <button @click="removeBook(index)">移除</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div v-if="books.length >0 ">总价：{{totalPrice  | priceFilter}}</div>
+        <div v-else>购物车空了</div>
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

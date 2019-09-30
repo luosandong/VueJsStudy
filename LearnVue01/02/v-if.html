@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <!-- v-if 和v-show的区别是，v-if 会清除元素  v-show不会清除元素，只会设置none -->
+      <h1 v-if="ishow">{{ firstName }} {{ lastName }}</h1>
+      <h1 v-show="ishow">{{ firstName }} {{ lastName }}</h1>
+      <h1 v-else>科比.布莱恩特</h1>
+      <button @click="toggle()">{{ btnText }}</button>
+      <div>
+        <input type="text" v-model="score" />
+        <button @click="addScore()">增加分数</button>
+        <button @click="subtraction()">减少分数</button>
+      </div>
+      <div>
+        <h1 v-if="score >= 90 ">优</h1>
+        <h1 v-else-if="score >= 80 ">良</h1>
+        <h1 v-else-if="score >= 60 ">合格</h1>
+        <h1 v-else="score < 60 ">差</h1>
+      </div>
+    </div>
+
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {
+          btnText: "隐藏/显示",
+          ishow: true,
+          firstName: "Kobe",
+          lastName: "Bryant",
+          score: 80
+        },
+        methods: {
+          toggle() {
+            this.ishow = !this.ishow;
+          },
+          addScore() {
+            this.score += 10;
+          },
+          subtraction() {
+            this.score -= 10;
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

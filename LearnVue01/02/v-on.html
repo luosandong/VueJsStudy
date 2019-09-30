@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <span :style="{'font-size':fontSize}">{{message}}</span>
+        <span :style="styles">{{message}}</span>
+        <!-- 阻止事件冒泡 -->
+        <div @click="divClick()">
+            <button @click="show()">按钮</button>
+            <button @click="show('2123',$event)">按钮2</button>
+            <button @click.stop="btnClick()">按钮</button>
+        </div>
+        <!-- 阻止默认事件 -->
+        <div>
+            <form action="www">
+                <input type="text" value="abc">
+                <input @click.prevent="submit()" type="submit" value="提交">
+            </form>
+        </div>
+        <!-- 限制特定键 -->
+        <div>
+            <input type="text" @keyup.enter="enter()" value="">
+        </div>
+        <!-- 只能触发一次 -->
+        <div>
+            <button @click.once="once()">只执行一次</button>
+        </div>
+    </div>
+
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                firstName: 'Kobe',
+                lastName: 'Bryant',
+                message: 'Hello Vue',
+                fontSize: '100px',
+                styles: [{
+                    'background-color': 'red'
+                }]
+            },
+            methods: {
+                show(a, envent) {
+                    console.log(this.firstName + ' ' + a);
+                    console.log(envent);
+                },
+                divClick() {
+                    console.log('div is clikck');
+                },
+                btnClick() {
+                    console.log('btn click');
+                },
+                submit() {
+                    console.log('submit click');
+                },
+                enter() {
+                    console.log('enter')
+                },
+                once() {
+                    console.log('once');
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

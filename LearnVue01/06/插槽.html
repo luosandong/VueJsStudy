@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>插槽的基本使用</title>
+</head>
+
+<body>
+    <!--
+        1. 在模板中定义slost标签 声明组件的插槽
+        2. 使用插槽的时候 在组件标签内填入要显示的内容替换插槽位置 
+        3. 插槽替换规则为 整体替换 意思是组件标签内有多个html元素，将整体替换
+        4. 插槽也有默认值
+    -->
+    <div id="app">
+        <cpn><i>我是插入到插槽的I标签</i></cpn>
+        <cpn><button>我是插入到插槽的按钮</button></cpn>
+        <cpn></cpn>
+        <cpn></cpn>
+    </div>
+    <template id="cpn">
+        <div>
+            <h1>我是主件标题</h1>
+            <slot><button>插槽的默认元素</button></slot>
+        </div>
+    </template>
+    <script src="../js/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {},
+            components: {
+                cpn: {
+                    template: '#cpn',
+                    data() {
+                        return {
+
+                        };
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

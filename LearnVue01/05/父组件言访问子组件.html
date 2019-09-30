@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>父组件访问子组件</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 不能用单标签 否则后面不显示 -->
+        <cpn></cpn>
+        <cpn></cpn>
+        <cpn ref="aaa"></cpn>
+        <button @click="invokeChidFunc">调用子组件的方法</button>
+    </div>
+    <template id="cpn">
+        <div>
+            我是子组件
+        </div>
+    </template>
+    <script src="../js/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+
+            },
+            components: {
+                cpn: {
+                    template: '#cpn',
+                    data() {
+                        return {
+                            name: '我是子组件的属性'
+                        }
+                    },
+                    methods: {
+                        showMessage() {
+                            console.log('子组件方法被父组件调用了');
+                        }
+                    }
+                }
+            },
+            methods: {
+                invokeChidFunc() {
+                    // 1.开发中不会用这种下标方式去取子组件
+                    // for (let child of this.$children) {
+                    //     console.log(child);
+                    //     child.showMessage();
+                    //     console.log(child.name);
+                    // }
+                    // 2.通常用使用$refs方法取子组件  需要在子组件的ref属性上设置名称
+                    console.log(this.$refs.aaa);
+                    console.log(this.$refs.aaa.showMessage());
+                    console.log(this.$refs.aaa.name);
+
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

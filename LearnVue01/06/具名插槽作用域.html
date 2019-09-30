@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>插槽作用域</title>
+</head>
+
+<body>
+    <!--slot-scope-->
+    <div id="app">
+
+        <top></top>
+        <hr>
+        <top>
+            <!-- 访问子组件的作用域 -->
+            <div slot-scope="slot">
+                <span>{{slot.data.join(' * ')}}</span>
+
+            </div>
+
+
+        </top>
+        <hr>
+        <top>
+            <!-- 访问子组件的作用域 推荐使用上面方法 ，下面这template写法为了兼容低版本vue -->
+            <template slot-scope="slot">
+                <!-- <div v-for="item in slot.data">{{item}}</div> -->
+                <span>{{slot.data.join(' ##### ')}}</span>
+                <!-- <span v-for="item in slot.data">{{item+'*****'}}</span> -->
+            </template>
+        </top>
+        <hr>
+
+    </div>
+    <template id="topnav">
+        <div>
+            <!-- 在父组件中访问子组件中的数据必须用data属性为作钩子 否则父组件是无法直接访问到子组件里的数据 -->
+            <slot :data="books">
+                <div v-for="item in books">{{item}}</div>
+            </slot>
+        </div>
+    </template>
+    <script src="../js/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            components: {
+                top: {
+                    template: '#topnav',
+                    data() {
+                        return {
+                            books: ['Java', 'C#', 'C++', 'Javascript', 'Python', 'Go']
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>具名插槽学习</title>
+</head>
+
+<body>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        ul>li {
+            display: inline-block;
+            padding: 2px;
+        }
+    </style>
+    <div id="app">
+        <top>
+            <button slot="left">《《</button>
+            <input type="text" slot="center"></input>
+            <button slot="right">》》</button>
+        </top>
+    </div>
+    <template id="nav-header">
+        <div>
+            <ul>
+                <li>
+                    <slot name="left"></slot>
+                </li>
+                <li>
+                    <slot name="center"></slot>
+                </li>
+                <li>
+                    <slot name="right"></slot>
+                </li>
+            </ul>
+        </div>
+    </template>
+    <script src="../js/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+
+            },
+            components: {
+                top: {
+                    template: '#nav-header',
+                    data() {
+                        return {}
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

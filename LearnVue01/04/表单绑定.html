@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>表单绑定</title>
+</head>
+
+<body>
+    <div id="app">
+        <form action="">
+            <label for="mial">邮件地址</label>
+            <input type="text" v-model="email" name="mail" id="mail">
+            <div>
+                <label for="">性别</label>
+                <input type="radio" id="man" name="sex" value="男" v-model="sex"><label for="man">男</label>
+                <input type="radio" id="woman" name="sex" value="女" v-model="sex"><label for="woman">女</label>
+            </div>
+            <div>
+                <label for="">爱好</label>
+                <label :for="item+index" v-for="(item,index) in aihao">
+                    <input :id="item+index" type="checkbox" :value="item" v-model="checkedNames">{{item}}
+                </label>
+                <!-- <div v-for="(item,index) in aihao">
+                    <input type="checkbox" :id="item+index" v-model="checkedNames"><label
+                        :for="item+index">{{item}}</label>
+                </div> -->
+            </div>
+            <div>
+                <label for="">种类：</label>
+                <select name="" id="" multiple v-model="checkedCategories">
+                    <option v-for="(item,index) in categories" :value="item">{{item}}</option>
+                    <!-- <option v-for="(item,index) in categories" value="">{{item}}</option> -->
+                    <!-- <option value="人类">人类</option>
+                    <option value="动物类">动物类</option>
+                    <option value="植物类">植物类</option>
+                    <option value="怪物类">怪物类</option> -->
+                </select>
+
+                <!-- <select v-model="selected">
+                    <option v-for="option in options" v-bind:value="option.value">
+                        {{ option.text }}
+                    </option>
+                </select>
+                <span>Selected: {{ selected }}</span> -->
+
+                <select v-model="optionNames" multiple>
+                    <option v-for="option in options" v-bind:value="option.value">
+                        {{ option.text }}
+                    </option>
+                </select>
+                <span>Selected: {{ optionNames }}</span>
+
+
+            </div>
+        </form>
+        <div>{{checkedNames}}</div>
+        <div>{{checkedCategories}}</div>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                email: '',
+                sex: '男',
+                checkedNames: ['足球'],
+                checkedCategories: [],
+                aihao: ['篮球', '足球', '乒乓球', '羽毛球'],
+                categories: ['人类', '动物', '飞禽', '鱼类'],
+                selected: 'A',
+                optionNames: [],
+                options: [{
+                        text: 'One',
+                        value: 'A'
+                    },
+                    {
+                        text: 'Two',
+                        value: 'B'
+                    },
+                    {
+                        text: 'Three',
+                        value: 'C'
+                    }
+                ]
+            },
+            computed: {
+                show() {
+                    return this.data;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

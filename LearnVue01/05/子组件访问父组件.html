@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>子组件访问父组件</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 不能用单标签 否则后面不显示 -->
+        <h1>我是根组件</h1>
+        <hr>
+        <cpn ref="aaa"></cpn>
+
+    </div>
+    <template id="cpn">
+        <div>
+            <h1>我是中间组件</h1>
+            <hr>
+            <ccpn></ccpn>
+        </div>
+    </template>
+    <template id="ccpn">
+        <div>
+            <h1>我是最里面的组件</h1>
+            <button @click="invokeParentFunc">调用父组件及根组件</button>
+        </div>
+    </template>
+    <script src="../js/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                name: '根组件'
+            },
+            components: {
+                cpn: {
+                    template: '#cpn',
+                    data() {
+                        return {
+                            name: '我是子组件的属性'
+                        }
+                    },
+                    methods: {
+                        showMessage() {
+                            console.log('被子组件调用了');
+                        }
+                    },
+                    components: {
+                        ccpn: {
+                            template: '#ccpn',
+                            methods: {
+                                invokeParentFunc() {
+                                    //调用父组件及根组件
+                                    this.$parent.showMessage()
+                                    this.$root.rootShow()
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            methods: {
+                rootShow() {
+                    console.log('根组件的方法被调用');
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

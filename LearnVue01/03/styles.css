@@ -1,0 +1,19 @@
+table {
+    width: 50%;
+    text-align: left;
+    /* 那么cellpadding=“0”：单元格边距等于0，其默认值为1px，其等同于css中的：{padding：0;} */
+    padding: 0;
+    /* cellspacing="0"：单元格间距等于0，其默认值为2px，
+    其等同于css中的：border-collapse: collapse（边框合并） */
+    border-collapse: collapse;
+
+}
+
+table tr th,
+table tr td {
+    border: 1px solid #ccc;
+}
+
+th {
+    background-color: #F1F3F4;
+}
